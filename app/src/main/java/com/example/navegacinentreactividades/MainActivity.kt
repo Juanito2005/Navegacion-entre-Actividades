@@ -1,47 +1,62 @@
 package com.example.navegacinentreactividades
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.navegacinentreactividades.ui.theme.NavegaciónEntreActividadesTheme
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            NavegaciónEntreActividadesTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            PantallaPrincipal()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+fun PantallaPrincipal() {
+    // 1. OBTENER EL CONTEXTO (Necesario para los Intents)
+    val contexto = LocalContext.current
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NavegaciónEntreActividadesTheme {
-        Greeting("Android")
+    // Truco: Para cerrar la app desde un Composable, necesitamos castear el contexto a Activity
+    val activity = (LocalContext.current as? Activity)
+
+    // Columna centrada (Equivalente a LinearLayout vertical + Gravity Center)
+    Column(
+        modifier = Modifier.fillMaxSize(), //Ocupa toda la pantalla
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Text(text = "Bienvenido a la Activity 1")
+
+        // --- BOTÓN 1: NAVEGAR ---
+        Button(onClick = {
+            // Rellena aquí: Crear el Intent para ir a SecondActivity
+            // Pista: Intent(contexto, Clase::class.java)
+            val intent = Intent(contexto, SecondActivity::class.java)
+            contexto.startActivity(intent)
+        }) {
+            Text("Ir a Segunda Activity")
+        }
+
+        // --- BOTÓN 2: CERRAR ---
+        Button(onClick = {
+            // Rellena aquí: Cerrar la actividad actual
+            activity?.finish()
+        }) {
+            Text("Cerrar App")
+        }
     }
 }
