@@ -33,5 +33,5 @@ Proyecto demostrativo del flujo de navegación y la gestión de la pila de activ
 * **Navegación:** `Intent` explícitos.
 * **Componentes:** Multiples `Activities`, `Button`.
 
----
+
 *Ejercicio 3 de la Tarea Evaluativa 2 - PMDM*
