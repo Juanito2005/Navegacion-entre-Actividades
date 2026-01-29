@@ -43,8 +43,6 @@ fun PantallaPrincipal() {
 
         // --- BOTÓN 1: NAVEGAR ---
         Button(onClick = {
-            // Rellena aquí: Crear el Intent para ir a SecondActivity
-            // Pista: Intent(contexto, Clase::class.java)
             val intent = Intent(contexto, SecondActivity::class.java)
             contexto.startActivity(intent)
         }) {
@@ -53,7 +51,6 @@ fun PantallaPrincipal() {
 
         // --- BOTÓN 2: CERRAR ---
         Button(onClick = {
-            // Rellena aquí: Cerrar la actividad actual
             activity?.finish()
         }) {
             Text("Cerrar App")
